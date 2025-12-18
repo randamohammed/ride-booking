@@ -1,0 +1,438 @@
+      :root {
+        --primary-color: #ff8c00;
+        --primary-hover: #ff7a00;
+        --background-color: #aaaaaa;
+        --card-background: #ffffff;
+        --text-primary: #333333;
+        --text-secondary: #777777;
+        --text-placeholder: #cccccc;
+        --border-color: #cccccc;
+        --border-radius: 12px;
+        --border-radius-lg: 24px;
+        --input-border-radius: 12px;
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        --transition: all 0.3s ease;
+        --blue-border: #4a90e2;
+
+        --passengers-bg: #f5f5f5;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--background-color);
+        font-size: 40px;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        background-color: var(--card-background);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow);
+        width: 100%;
+        max-width: 500px;
+        overflow: hidden;
+      }
+
+      .tabs {
+        display: flex;
+        border-bottom: 1px solid var(--border-color);
+
+      }
+
+      .tab {
+        flex: 1;
+        padding: 18px;
+        text-align: center;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 500;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        color: var(--text-primary);
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-bottom: 3px solid transparent;
+      }
+
+      .tab.active {
+        background-color: var(--primary-color);
+        color: white;
+        border-bottom-color: var(--primary-color);
+      }
+
+      .tab:hover:not(.active) {
+        background-color: #f9f9f9;
+      }
+
+      .tab-content {
+        padding: 30px;
+      }
+
+      .trip-type {
+        display: flex;
+        gap: 40px;
+        margin-bottom: 30px;
+        
+      }
+
+      span{
+        font-size:18px;
+      }
+      .radio-group {
+        
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        font-size: 15px;
+        color: var(--text-primary);
+      }
+
+      .radio-group input[type="radio"] {
+        width: 22px;
+        height: 22px;
+        accent-color: #4a90e2;
+        cursor: pointer;
+      }
+
+
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      .input-wrapper {
+        position: relative;
+      }
+
+      .input-wrapper input,
+      .input-wrapper select,
+      .input-wrapper textarea {
+        width: 100%;
+        padding: 18px 40px 18px 20px;
+        border: 2px solid #cccccc;
+        border-radius: var(--input-border-radius);
+        font-size: 15px;
+        color: var(--text-primary);
+        background-color: white;
+        transition: var(--transition);
+        font-family: inherit;
+      }
+
+      .input-wrapper input:focus,
+      .input-wrapper select:focus,
+      .input-wrapper textarea:focus {
+        outline: none;
+        border-color: var(--blue-border);
+      }
+
+      .input-wrapper.active input {
+        border-color: var(--blue-border);
+      }
+
+      .input-wrapper textarea {
+        resize: vertical;
+        min-height: 80px;
+        padding-top: 15px;
+      }
+
+      .input-icon {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999999;
+        font-size: 20px;
+      }
+
+      .date-time-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .date-time-group .input-wrapper input {
+        padding-right: 20px;
+      }
+
+      .date-time-group .input-icon {
+        right: 20px;
+      }
+
+      /* Label positioning for date/time */
+      .date-time-label {
+        position: absolute;
+        top: -13px;
+        left: 30px;
+        background-color: white;
+        font-size: 15px;
+        color: #999999;
+      }
+
+      .passengers-section {
+
+        background-color: white;
+        border-radius: 10px;
+        padding: 0;
+       
+        margin-bottom: 20px;
+        margin-top: -10px;
+        display: none;
+        border: 2px solid #cccccc;
+ 
+   
+      }
+
+      .passengers-section.active {
+        display: block;
+      }
+
+      .passenger-control {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background-color: white;
+      }
+
+      .passenger-control:first-child {
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .passenger-label {
+        font-size: 16px;
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      .passenger-sublabel {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-top: 2px;
+      }
+
+      .counter {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background-color: #e8e8e8;
+        border-radius: 10px;
+        padding: 5px 10px;
+      }
+
+      .counter button {
+        width: 40px;
+        height: 20px;
+        border: none;
+        background-color: transparent;
+        border-radius: 8px;
+        font-size: 20px;
+        cursor: pointer;
+        color: #666666;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+
+      .counter button:hover:not(:disabled) {
+        background-color: #d0d0d0;
+        color: #333333;
+      }
+
+      .counter button:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      .counter span {
+        font-size: 18px;
+        font-weight: 400;
+        min-width: 30px;
+        text-align: center;
+        color: #333333;
+      }
+
+      .book-button {
+        width: 100%;
+        padding: 18px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: var(--input-border-radius);
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .book-button:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+      }
+
+      .book-button:active {
+        transform: translateY(0);
+      }
+
+      ::placeholder {
+        color: #cccccc;
+      }
+
+      .passengers-input-wrapper {
+        cursor: pointer;
+        position: relative;
+      }
+
+      .passengers-input-wrapper input {
+        cursor: pointer;
+        user-select: none;
+        padding-right: 20px;
+        padding-left: 50px;
+      }
+
+      .passengers-input-wrapper.active {
+        margin-bottom: 0;
+      }
+
+      .passengers-input-wrapper.active input {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-color: var(--blue-border);
+      }
+
+      .passengers-label-top {
+        position: absolute;
+        top: 20px;
+        left: 30px;
+        background-color: white;
+        margin: 0 20px;
+        font-size: 13px;
+        color: var(--blue-border);
+        z-index: 1;
+        display: none;
+      }
+
+      .passengers-input-wrapper.active .passengers-label-top{
+        display: block;
+
+        
+      }
+
+       .passengers-input-wrapper input:focus::placeholder {
+        opacity: 0;
+       }
+       
+
+       .passengers-input-wrapper input::placeholder ,.passengers-label-top{
+        transition: opacity 0.2s ease;
+       }
+
+
+       .passengers-input-wrapper:not(.active) input::placeholder{
+       opacity: 1;
+       }
+       
+      .dropdown-icon {
+        position: absolute;
+
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999999;
+        font-size: 16px;
+        pointer-events: none;
+        transition: var(--transition);
+      }
+
+      .dropdown-icon.active {
+        transform: translateY(-50%) rotate(180deg);
+      }
+
+      @media (max-width: 500px) {
+        .container {
+          max-width: 100%;
+        }
+
+        .tab {
+          font-size: 14px;
+          padding: 15px 10px;
+        }
+
+        .tab-content {
+          padding: 20px;
+        }
+        .date-time-group{
+          grid-template-columns: 1fr;
+        }
+        .svg-span-data{
+          margin-left: -60px;
+          background-color: red;
+        }
+
+      }
+       .svg-span-data{
+          margin-right: 40px;
+        }
+      .input-data {
+         position: relative;
+         display: flex;
+         align-items: center;
+         gap: 20px;
+         padding: 18px 20px;
+         border: 2px solid #cccccc;
+         border-radius: var(--input-border-radius);
+         font-size: 18px;
+         background-color: white;
+         cursor: pointer;
+      }
+
+   
+      #departureDate {
+       position: absolute;
+       width: 0;
+       height: 0;
+       opacity: 0;
+       cursor: pointer;
+      }
+      #departureTime{
+        border: none;
+        outline: none;
+        padding:0;
+
+      }
+input[type="time"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+}
+
+input[type="time"] {
+  -moz-appearance: textfield;
+  list-style: none;
+}
+
+input[type="time"]::-webkit-clear-button,
+input[type="time"]::-webkit-inner-spin-button {
+  display: none;
+}
+.svg-span{
+  width: 22px;
+  height: 25px;
+  color: #333333;
+}

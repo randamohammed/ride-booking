@@ -1,307 +1,157 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>واجهة حجز مطابقة</title>
-    <style>
-        :root {
-            --primary-orange: #ff8c00;
-            --border-gray: #b0b0b0;
-            --bg-light: #f8f9fa;
-            --text-dark: #333;
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>حجز سفر</title>
+    
+    <link rel="stylesheet" href="Style.css">
+   <script defer src="ride.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="tabs">
+        <button class="tab active">
+         <span class="svg-span">
+         <svg viewBox="0 0 24 24" fill="currentColor">
+           <path d="M3 13h18v4H3zM6 17a1 1 0 1 0 0 .1M18 17a1 1 0 1 0 0 .1M6 6h12l2 5H4z"/>
+         </svg>
+         </span>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
+        <span class="tab-lade">سفر</span>
+        </button>
+        <button class="tab">
+          <span class="svg-span"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM7 3V8.41421L10.2929 11.7071L11.7071 10.2929L9 7.58579V3H7Z" fill="#000000"/> </svg></span>
+          <span>بالساعة</span>
+        </button>
 
-        .booking-card {
-            background: white;
-            width: 100%;
-            max-width: 450px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            overflow: visible;
-            position: relative;
-        }
+        <button class="tab">
+          <span  class="svg-span"><svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 225.000000 225.000000"
+         preserveAspectRatio="xMidYMid meet">
 
-        /* Tabs Section */
-        .tabs-header {
-            display: flex;
-            border-bottom: 1px solid #eee;
-        }
+         <g transform="translate(0.000000,225.000000) scale(0.100000,-0.100000)"
+         fill="#000000" stroke="none">
+         <path d="M666 1955 c-64 -23 -86 -44 -189 -186 -152 -207 -138 -129 -135 -747
+         l3 -529 30 -48 c22 -36 45 -57 84 -77 l53 -28 613 0 613 0 53 28 c39 20 62 41
+         84 77 l30 48 0 543 0 542 -67 99 c-122 178 -171 236 -218 263 l-45 25 -435 2
+         c-356 2 -442 0 -474 -12z m904 -287 c33 -45 60 -85 60 -90 0 -4 -227 -8 -505
+         -8 -278 0 -505 4 -505 8 0 5 27 45 60 90 l60 82 385 0 385 0 60 -82z"/>
+         </g></svg></span>
+          <span>باقات</span>
+        </button>
+       <button class="tab">
+  <span class="svg-span">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M3 6h12v12H3zM15 9l6-3v12l-6-3z"/>
+    </svg>
+  </span>
+  <span>فيديو</span>
+</button>
 
-        .tab-item {
-            flex: 1;
-            padding: 15px 5px;
-            text-align: center;
-            cursor: pointer;
-            color: #555;
-            font-weight: bold;
-            display: flex;
-            flex-direction: row-reverse;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            border-radius: 10px 10px 0 0;
-        }
+      </div>
 
-        .tab-item.active {
-            background-color: var(--primary-orange);
-            color: white;
-        }
-
-        /* Form Content */
-        .form-body {
-            padding: 20px;
-        }
-
-        .trip-options {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-            justify-content: flex-end;
-        }
-
-        .option {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-        }
-
-        /* Field Styling to Match IMG2249.jpg */
-        .input-container {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .field-label {
-            position: absolute;
-            top: -10px;
-            right: 15px;
-            background: white;
-            padding: 0 5px;
-            font-size: 12px;
-            color: #666;
-            z-index: 2;
-        }
-
-        .input-box {
-            width: 100%;
-            padding: 15px;
-            border: 1.5px solid var(--border-gray);
-            border-radius: 12px;
-            font-size: 15px;
-            box-sizing: border-box;
-            text-align: right;
-            background: white;
-        }
-
-        .input-box:focus {
-            outline: none;
-            border-color: #007bff; /* Blue glow like in IMG2249.jpg */
-        }
-
-        .icon-left {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #888;
-        }
-
-        /* Grid for Date and Time */
-        .grid-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        /* Passengers Popup Section */
-        .passengers-popup {
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            right: 0;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            padding: 15px;
-            z-index: 100;
-            display: none; /* Hidden by default */
-        }
-
-        .passengers-popup.active {
-            display: block;
-        }
-
-        .counter-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .counter-label {
-            text-align: right;
-        }
-
-        .counter-title { font-weight: bold; font-size: 16px; }
-        .counter-sub { font-size: 11px; color: #888; }
-
-        .counter-controls {
-            display: flex;
-            align-items: center;
-            background: #f0f0f0;
-            border-radius: 8px;
-            padding: 5px;
-        }
-
-        .counter-controls button {
-            border: none;
-            background: transparent;
-            width: 30px;
-            height: 30px;
-            font-size: 20px;
-            cursor: pointer;
-            color: #444;
-        }
-
-        .counter-controls span {
-            width: 40px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        /* Action Button */
-        .btn-submit {
-            width: 100%;
-            background: var(--primary-orange);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-
-<div class="booking-card">
-    <div class="tabs-header">
-        <div class="tab-item active">
-            <span>سفر</span>
-            <span>🚗</span>
+      <div class="tab-content">
+        <div class="trip-type">
+          <label class="radio-group">
+            <input type="radio" name="tripType" value="one-way" checked />
+            <span>ذهاب فقط</span>
+          </label>
+          <label class="radio-group">
+            <input type="radio" name="tripType" value="round-trip" />
+            <span>ذهاب وعودة</span>
+          </label>
         </div>
-        <div class="tab-item">بالساعة 🕒</div>
-        <div class="tab-item">باقات 💼</div>
-        <div class="tab-item">فيديو 🎥</div>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <input type="text" placeholder="موقع الانطلاق" id="departure" />
+             <span class="input-icon">
+                <svg class="svg-span" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/>
+              </svg>
+              </span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <input type="text" placeholder="موقع الوصول" id="arrival" />
+            <span class="input-icon">
+                <svg class="svg-span" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/>
+              </svg>
+              </span>
+          </div>
+        </div>
+
+        <div class="date-time-group">
+          <div class="input-data" id="dateBox">
+        
+              <span  id="dateText">تاريخ الانطلاق</span >
+                <input  type="date" id="departureDate" />
+                 <span class="svg-span">
+               <svg viewBox="0 0 24 24" fill="currentColor">
+                 <path d="M7 2v2H5a2 2 0 0 0-2 2v3h18V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zm14 9H3v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-9z"/>
+               </svg>
+              </span>
+           
+          </div>
+
+          <div class="input-data"  id="timeBox">
+            <span class="date-time-label">وقت الانطلاق</span>
+            <input  type="time" value="12:00" id="departureTime" />
+               <span  class="svg-span svg-span-data"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16ZM7 3V8.41421L10.2929 11.7071L11.7071 10.2929L9 7.58579V3H7Z" fill="#000000"/> </svg></span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div
+            class="input-wrapper passengers-input-wrapper"
+            id="passengersToggle">
+            <span class="passengers-label-top">الركاب</span>
+            <input
+              type="text"
+              placeholder="الركاب"
+              id="passengersInput"
+              readonly
+            />
+            <span class="dropdown-icon" id="dropdownIcon">▼</span>
+          </div>
+        </div>
+
+        <div class="passengers-section" id="passengersSection">
+          <div class="passenger-control">
+            <div>
+              <div class="passenger-label">الركاب</div>
+              <div class="passenger-sublabel">عدد الركاب</div>
+            </div>
+            <div class="counter">
+              <button onclick="decrementPassengers()">−</button>
+              <span id="passengersCount">0</span>
+              <button onclick="incrementPassengers()">+</button>
+            </div>
+          </div>
+
+          <div class="passenger-control">
+            <div>
+              <div class="passenger-label">السيارات</div>
+              <div class="passenger-sublabel">عدد السيارات</div>
+            </div>
+            <div class="counter">
+              <button onclick="decrementCars()">−</button>
+              <span id="carsCount">1</span>
+              <button onclick="incrementCars()">+</button>
+            </div>
+          </div>
+        </div>
+
+        <button class="book-button">احجز الآن</button>
+      </div>
     </div>
 
-    <div class="form-body">
-        <div class="trip-options">
-            <div class="option">
-                <span>ذهاب فقط</span>
-                <input type="radio" name="t" checked>
-            </div>
-            <div class="option">
-                <span>ذهاب وعودة</span>
-                <input type="radio" name="t">
-            </div>
-        </div>
 
-        <div class="input-container">
-            <input type="text" class="input-box" placeholder="موقع الانطلاق">
-            <span class="icon-left">📍</span>
-        </div>
-
-        <div class="input-container">
-            <input type="text" class="input-box" placeholder="موقع الوصول">
-            <span class="icon-left">📍</span>
-        </div>
-
-        <div class="grid-row">
-            <div class="input-container">
-                <label class="field-label">تاريخ الانطلاق</label>
-                <input type="date" class="input-box">
-            </div>
-            <div class="input-container">
-                <label class="field-label">وقت الانطلاق</label>
-                <input  type="time" class="input-box" value="12:00"  class="mmmm">
-            </div>
-        </div>
-
-        <div class="input-container" style="margin-bottom: 0;">
-            <label class="field-label">الركاب</label>
-            <div class="input-box" id="passengers-trigger" style="cursor:pointer; height: 50px;">
-                <span id="display-text">اختر عدد الركاب</span>
-            </div>
-            
-            <div class="passengers-popup" id="popup">
-                <div class="counter-row">
-                    <div class="counter-label">
-                        <div class="counter-title">الركاب</div>
-                        <div class="counter-sub">عدد الركاب</div>
-                    </div>
-                    <div class="counter-controls">
-                        <button onclick="change('p', 1)">+</button>
-                        <span id="p-count">0</span>
-                        <button onclick="change('p', -1)">-</button>
-                    </div>
-                </div>
-                <div class="counter-row">
-                    <div class="counter-label">
-                        <div class="counter-title">السيارات</div>
-                        <div class="counter-sub">عدد السيارات</div>
-                    </div>
-                    <div class="counter-controls">
-                        <button onclick="change('c', 1)">+</button>
-                        <span id="c-count">1</span>
-                        <button onclick="change('c', -1)">-</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <button class="btn-submit">احجز الآن</button>
-    </div>
-</div>
-
-<script>
-    const trigger = document.getElementById('passengers-trigger');
-    const popup = document.getElementById('popup');
-    let p = 0, c = 1;
-
-    trigger.onclick = () => popup.classList.toggle('active');
-
-    function change(type, val) {
-        if(type === 'p') {
-            p = Math.max(0, p + val);
-            document.getElementById('p-count').innerText = p;
-        } else {
-            c = Math.max(1, c + val);
-            document.getElementById('c-count').innerText = c;
-        }
-        document.getElementById('display-text').innerText = `${p} ركاب - ${c} سيارة`;
-    }
-
-    // Close popup if clicking outside
-    window.onclick = function(event) {
-        if (!event.target.closest('.input-container')) {
-            popup.classList.remove('active');
-        }
-    }
-</script>
-
-</body>
+  </body>
 </html>
